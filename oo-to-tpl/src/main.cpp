@@ -5,14 +5,28 @@
 #include <chrono>
 
 /**
- * C++ example showing a 'modern' way to wrap a container and manage the
- * lifecycle of objects within it. Those objects use variadic templates, and
- * avoid use of pointers entirely, allowing full stack allocation and no
- * heap usage
+ * C++ example comparing a classic object orientated (dynamic polymorphism) use case
+ * with a modern C++17 templated (static polymorphism) equivalent.
  * 
- * Compare and contrast this memory use and CPU use in Valgrind with the
- * manager-oo version which uses Object Orientation and inheritance and heap
- * allocation.
+ * Memory use for each object instance is shown.
+ * 
+ * Note we are using shared_ptr for the comparison as this is typical when passing 
+ * dervied class instances around within managed C++ code.
+ * 
+ * In particular note the overhead of the vtable and shared_ptr for referencing
+ * the instances using dynamic polymorphism. The calls are also extra CPU
+ * overhead as there are multiple following of pointers (one for the shared ptr
+ * and one for the vtable to function ptr).
+ * 
+ * Also worthy of note is that the rect, circ, and sqr classes will be
+ * constructed on the heap, not the stack, for the dynamic polymorphism
+ * variant. For iterating over thousands of objects (like you would do when
+ * performing regular 'dirty' screen region rendering), the performance
+ * cost of not having CPU cache locality will also slow down complex
+ * algorithms executed in tight loops.
+ * 
+ * Note: On Win10 with CLang the OO version uses 136 bytes of RAM (stack + heap)
+ * whereas the template version uses only 64 bytes of RAM (stack only).
  */
 
 int main() {
