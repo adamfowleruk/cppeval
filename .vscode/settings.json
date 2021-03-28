@@ -47,6 +47,8 @@
     "xlocinfo": "cpp",
     "xlocnum": "cpp",
     "variant": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "numbers": "cpp",
+    "ratio": "cpp"
   }
 }

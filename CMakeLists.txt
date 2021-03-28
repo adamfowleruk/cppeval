@@ -10,3 +10,4 @@ include(GNUInstallDirs)
 
 add_subdirectory(manager-oo)
 add_subdirectory(manager-tpl)
+add_subdirectory(oo-to-tpl)

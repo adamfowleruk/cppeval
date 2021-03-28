@@ -10,4 +10,7 @@ include_directories(
   include
 )
 
+#target_link_libraries(manager-tpl PRIVATE "-Wl,--stack,100000000")
+add_compile_options(-Wl,--stack,100000000)
+
 target_compile_features(manager-tpl PRIVATE cxx_std_17)
